@@ -1,0 +1,51 @@
+.container {
+    /* background-color: #f6f6ef; */
+    /* margin: 10px 20px 10px 20px; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0px 110px;
+ 
+
+}
+
+.homepage-header{
+    background-color: #ff6600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: smaller;
+    height: 26px;
+
+}
+
+.homepage-ul, .login {
+    display: flex;
+    list-style: none;
+    padding: 0px;
+}
+.homepage-ul li{   
+    padding: 0px;
+}
+
+.homepage-ul a, .login a{
+    text-decoration: none;
+    padding: 0px 3px 0px 3px;
+    color: black;
+    cursor: pointer;
+}
+
+.logo{
+    border: 2px solid white;
+    margin: -2px 2px -2px 4px;
+}
+
+.hacker-news {
+    font-weight: bold;
+}
+
+.context {
+    background-color:#f6f6ef ;
+}
+.context-of-head{
+    font-size: smaller;
+
+}
