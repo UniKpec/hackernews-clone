@@ -83,11 +83,9 @@ td{
     border-top: 3px solid #ff6600;
     text-align: center;
     color:black;
-}
-
-.footer-of-news p{
     font-size: small;
 }
+
 
 .footer-ul {
     display: flex;
@@ -101,4 +99,12 @@ td{
     padding-left: 10px;
     color: black;
     
+}
+
+.footer-ul a{
+    font-size: smaller;
+}
+
+.footer-of-news span{
+    color: #828282;
 }

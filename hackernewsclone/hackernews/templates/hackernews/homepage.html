@@ -1,12 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacker News</title>
-    <link rel="icon" href="hacker-news-icon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="homapage.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="{% static 'img/hacker-news-icon.png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'css/homapage.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 </head>
 <body>
     <div class="container">
@@ -15,7 +18,7 @@
                 <ul class="homepage-ul">
                     <li class="logo">
                         <a href="">
-                            <img src="hacker-news-icon.png" alt="hacker news logo"
+                            <img src="{% static 'img/hacker-news-icon.png' %}" alt="hacker news logo"
                             width="15px"
                             height="15px">
                     </a></li>
@@ -192,8 +195,10 @@
                     | Contact
                     </a></li>
             </ul>
-
-
+            <span>
+            Search:
+                <input type="search">
+            </span> 
         </footer>
     </div>
 </body>
