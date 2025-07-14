@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker News</title>
+    <link rel="icon" href="{% static 'img/hacker-news-icon.png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'css/homapage.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+<body>
+    <div class="container">
+        <header class="homepage-header">
+            <nav>
+                <ul class="homepage-ul">
+                    <li class="logo">
+                        <a href="">
+                            <img src="{% static 'img/hacker-news-icon.png' %}   " alt="hacker news logo"
+                            width="15px"
+                            height="15px">
+                    </a></li>
+                    <li class="hacker-news">
+                         <a href="">
+                            Hacker News
+                    </a></li>
+                    <li class="new">
+                         <a href="">
+                            new
+                    </a></li>
+                    <li class="past">
+                         <a href="">
+                            | past
+                    </a></li>
+                    <li class="comments">
+                         <a href="">
+                            | comments
+                    </a></li>
+                    <li class="ask">
+                         <a href="">
+                            | ask
+
+                    </a></li>
+                    <li class="show">
+                         <a href="">
+                            | show
+                    </a></li>
+                    <li class="jobs">
+                         <a href="">
+                            | jobs
+                    </a></li>
+                    <li class="submit">
+                         <a href="">
+                            | submit
+                    </a></li>
+                </ul>
+            </nav>
+            <ul class="login">
+                <li><a href="#">login</a></li>
+            </ul>
+            
+        </header>
+    {% block content %}
+    
+    {% endblock %}
+        <footer class="footer-of-news">
+            <p>
+                <a href="https://www.ycombinator.com/apply/
+                ">Consider applying for YC's Fall 2025 batch! Applications are open till Aug 4</a>
+            </p>
+            <ul class="footer-ul">
+                <li><a href="">
+                    Guidelines
+                    </a>
+                </li>
+                <li><a href="">
+                    | FAQ
+                    </a></li>
+                <li><a href="">
+                    | Lists
+                    </a></li>
+                <li><a href="">
+                    | API
+                    </a></li>
+                <li><a href="">
+                    | Security
+                    </a></li>
+                <li><a href="">
+                    | Legal
+                    </a></li>
+                <li><a href="">
+                    | Apply to YC
+                    </a></li>
+                <li><a href="">
+                    | Contact
+                    </a></li>
+            </ul>
+            <span>
+            Search:
+                <input type="search">
+            </span> 
+        </footer>
+    </div>
+</body>
+</html>

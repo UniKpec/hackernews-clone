@@ -47,19 +47,23 @@
     color: #828282;
     padding-top: 10px;
 }
-.context-of-head, .context-of-head a{
+.context-of-head a{
     font-size: small;
     color: black;
 
+}
+.context-of-head a:visited{
+    color: #828282;
+}
+.lnk{
+    color: #828282;
 }
 .number{
     font-size: small;
 }
 
 .table-of-context a{
-
-    text-decoration: none;
-    color: #828282;
+    text-decoration: none; 
 }
 
 td{
