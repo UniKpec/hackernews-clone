@@ -17,13 +17,13 @@
             <nav>
                 <ul class="homepage-ul">
                     <li class="logo">
-                        <a href="">
+                        <a href="{% url 'hackernews:news' %}">
                             <img src="{% static 'img/hacker-news-icon.png' %}   " alt="hacker news logo"
                             width="15px"
                             height="15px">
                     </a></li>
                     <li class="hacker-news">
-                         <a href="">
+                         <a href="{% url 'hackernews:news' %}">
                             Hacker News
                     </a></li>
                     <li class="new">
