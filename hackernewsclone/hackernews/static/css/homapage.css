@@ -47,6 +47,10 @@
     color: #828282;
     padding-top: 10px;
 }
+.context p {
+    font-size: smaller;
+    padding-left: 10px;
+}
 .context-of-head a{
     font-size: small;
     color: black;
