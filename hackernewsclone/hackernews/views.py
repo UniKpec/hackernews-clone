@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Story
 from urllib.parse import urlparse
 import requests
+import datetime
 
 def fetch_stories(story_type="top"):
       endpoints = {
@@ -30,9 +31,26 @@ def fetch_stories(story_type="top"):
                         "descendants": story_data.get("descendants", 0),
                         "domain": urlparse(story_data.get("url", "")).netloc,
                         "story_type": story_type,
+                        "time": datetime.datetime.fromtimestamp(story_data.get("time", 0)),
                   })
           
       
+def ask_detail(request, hn_id):
+    story_url = f"https://hacker-news.firebaseio.com/v0/item/{hn_id}.json"
+    story_data = requests.get(story_url).json()
+
+    
+    comments = []
+    for kid_id in story_data.get("kids", []):
+        comment_url = f"https://hacker-news.firebaseio.com/v0/item/{kid_id}.json"
+        comment_data = requests.get(comment_url).json()
+        comments.append(comment_data)
+
+    return render(request, "hackernews/ask_detail.html", {
+        "story": story_data,
+        "comments": comments
+    })
+
            
 def top_stories_show(request):
         fetch_stories()
@@ -53,6 +71,11 @@ def show_stories_show(request):
       fetch_stories("show")
       stories = Story.objects.filter(story_type = "show")
       return render(request,'hackernews/show.html',context={"stories":stories})
+
+def show_stories_ask(request):
+      fetch_stories("ask")
+      stories = Story.objects.filter(story_type = "ask")
+      return render(request,'hackernews/ask.html',context={"stories":stories})
 
 
 def index(request):

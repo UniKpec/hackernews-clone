@@ -4,9 +4,6 @@
 {% block content %}
 
         <main class="context">
-            <p>
-                These are jobs at YC startups. See more at <a href="https://www.ycombinator.com/jobs">ycombinator.com/jobs.</a>
-            </p>
             {% for story in stories %}
             <table class="table-of-context">
                 <tbody class="t-body-of-context">
@@ -19,7 +16,7 @@
                             </a>
                         </td>
                         <td  class="context-of-head"  >
-                            <a href="{{ story.url }}" >
+                            <a href="{% url 'hackernews:ask_detail' story.hn_id %}" >
                             {{ story.title }}
                             </a>   
                         </td>

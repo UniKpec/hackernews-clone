@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="context">
+    <table class="table-of-context">
+        <tbody class="t-body-of-context">
+        <tr>
+            <td> <a href="#" style="color: #828282;" >
+                <i class="fa-duotone fa-solid fa-caret-up" ></i>
+                </a>
+            </td>
+            <td  class="context-of-head" >
+                <a href="">
+                    {{ story.title }}  
+                    </a>
+                </td>
+            </tbody>
+    </table>
+        </tr>
+        <table class="table-of-context">
+                <tbody class="context-of-attributes">
+        <tr>
+            <td style="padding-left: 25px;">
+            </td>
+            <td >
+                {{ story.score }} point by 
+            </td>
+            <td>
+                <a href="#" class="lnk">{{ story.by }}</a>
+            </td>
+            <td>
+            <a href="" class="lnk"> {{ story.time }} ago </a>
+            </td>
+            <td>
+            <a href="#" class="lnk">| hide</a>
+            </td>
+            <td>
+            <a href="#" class="lnk">|  {{ story.descendants }} comments</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    {% if story.text %}
+    <div style="padding-left: 20px; padding-top: 10px; font-size: 13px;">
+        {{ story.text|safe }}
+    </div>
+    {% endif %}
+
+    <div style="margin: 20px 0; padding-left: 20px;">
+        <form method="POST">
+            {% csrf_token %}
+            <textarea rows="4" cols="70" placeholder="add comment"></textarea><br>
+            <button type="submit">add comment</button>
+        </form>
+    </div>
+
+
+    <div style="padding-left: 20px;">
+        {% for comment in comments %}
+        <div style="margin-top: 20px;">
+            <span style="color: #828282; font-size: 11px;">
+                <a href="#" style="color: #828282;" ><i class="fa-duotone fa-solid fa-caret-up" ></i></a> {{ comment.by }}   time ago
+            </span>
+            <div style="font-size: 12px; margin-top: 4px; color: black;">
+                {{ comment.text|safe }}
+            </div>
+            <div style="margin-top: 4px;">
+                <a href="#" style="font-size: 11px;">reply</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</main>
+{% endblock %}

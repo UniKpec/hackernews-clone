@@ -9,4 +9,5 @@ class Story(models.Model):
     domain = models.CharField(max_length=100, null=True,blank=True)
     hn_id = models.IntegerField(unique=True) # Hacker News ID
     story_type = models.CharField(max_length=20, default="top") #top,new,job gib sayfaların türlerini tutacağız. filtreleme için yararlı.
+    time = models.DateTimeField(null=True,blank=True)
 # Create your models here.
