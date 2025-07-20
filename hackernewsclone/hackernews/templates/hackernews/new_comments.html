@@ -4,36 +4,83 @@
 {% block content %}
 
         <main class="context">
-            {% for comment in comments %}
-                <table class="table-of-context">
-                <tbody class="context-of-attributes">
-                        <tr>
+        <table class="table-of-context">
+                <tbody class="t-body-of-context">
+                    <tr>
                         <td> <a href="#" style="color: #828282;" >
                                 <i class="fa-duotone fa-solid fa-caret-up" ></i>
                             </a>
                         </td>
-                            <td >
-                                {{ comment.by }}
-                            </td>
-                            <td>
-                               <a href="#" class="lnk"> {{ comment.time }} ago</a>
-                            </td>
-                            <td>
-                                <a href="#" class="lnk">on: {{ comment.title }}</a>
-                            </td>
-                        </tr>
+                        <td  class="context-of-head"  >
+                            <a href="{{ story.url }}" >
+                            {{ story.title }}
+                            </a>   
+                        </td>
+                        <td class="context-of-head-link lnk" style="color: #828282;">
+                            {% if story.domian %}
+                            <a href="{% url 'hackernews:stories_by_domain' story.domain %}" class="lnk">({{ story.domain }})</a>
+                            {% else %}
+                            <a href="#">()</a>
+                            {% endif %}
+                        </td>
                     </tr>
                 </tbody>
-            </table>
-            <table class="table-of-context">
+                </table>
+                <table class="table-of-context">
                 <tbody class="context-of-attributes">
                         <tr>
                             <td style="padding-left: 25px;">
                             </td>
                             <td >
-                                {{ comment.text |safe }}
+                                {{  story.score }} point by 
+                            </td>
+                            <td>
+                                <a href="#" class="lnk">{{  story.by }}</a>
+                            </td>
+                            <td>
+                               <a href="" class="lnk"> {{  story_data.time }} ago </a>
+                            </td>
+                            <td>
+                                <a href="#" class="lnk">| hide</a>
+                            </td>
+                            <td>
+                                <a href="#" class="lnk">|  {{  story.descendants }} comments</a>
                             </td>
                         </tr>
+                    </tr>
+                </tbody>
+            </table>
+                <div style="margin: 20px 0; padding-left: 20px;">
+                    <form method="POST">
+                    {% csrf_token %}
+                        <textarea rows="4" cols="70" placeholder="add comment"></textarea><br>
+                        <button type="submit">add comment</button>
+                    </form>
+                </div>
+                {% for comment in comments %}
+                <table class="table-of-context">
+                    <tbody class="context-of-attributes">   
+                        <tr>
+                        <td> <a href="#" style="color: #828282;" >
+                                <i class="fa-duotone fa-solid fa-caret-up" ></i>
+                            </a>
+                        </td>
+                            <td>
+                                {{ comment.by }}
+                            </td>
+                            <td>
+                               <a href="#" class="lnk"> {{ comment.time }} ago</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="color: black; font-size: smaller; text-align: left;">
+                            {{ comment.text |safe }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             {% endfor %}

@@ -84,7 +84,23 @@ def ask_detail(request, hn_id):
         "story": story_data,
         "comments": comments
     })
+def fetch_latest_comments(request):
+    url = "https://hacker-news.firebaseio.com/v0/topstories.json"
+    response = requests.get(url)
+    story_ids = response.json()[:10]  
+    comments = []
+    for story_id in story_ids:
+        story_url = f"https://hacker-news.firebaseio.com/v0/item/{story_id}.json"
+        story_data = requests.get(story_url).json()
+        for comment_id in story_data.get("kids", []):
+            comment_url = f"https://hacker-news.firebaseio.com/v0/item/{comment_id}.json"
+            comment_data = requests.get(comment_url).json()
+            if comment_data.get("type") == "comment":
+                comments.append(comment_data)
 
+    return render(request, "hackernews/latest_comments.html", {
+        "comments": comments
+    })
 
 def fetch_comments_by_story_id(request,hn_id):
     story_url = f"https://hacker-news.firebaseio.com/v0/item/{hn_id}.json"

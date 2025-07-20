@@ -10,6 +10,7 @@ urlpatterns = [
     path("job/",views.job_stories_show,name="job"),
     path("show/",views.show_stories_show,name="show"),
     path("ask/",views.show_stories_ask,name="ask"),
+    path("comments/",views.fetch_latest_comments,name="comments"),
     path("login/",views.login_signup_view,name="login_signup"),
     path("logout/",views.logout_view,name="logout"),
     path("ask/<int:hn_id>/",views.ask_detail,name="ask_detail"),
