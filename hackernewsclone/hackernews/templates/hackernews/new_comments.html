@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+        <main class="context">
+            {% for comment in comments %}
+                <table class="table-of-context">
+                <tbody class="context-of-attributes">
+                        <tr>
+                        <td> <a href="#" style="color: #828282;" >
+                                <i class="fa-duotone fa-solid fa-caret-up" ></i>
+                            </a>
+                        </td>
+                            <td >
+                                {{ comment.by }}
+                            </td>
+                            <td>
+                               <a href="#" class="lnk"> {{ comment.time }} ago</a>
+                            </td>
+                            <td>
+                                <a href="#" class="lnk">on: {{ comment.title }}</a>
+                            </td>
+                        </tr>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table-of-context">
+                <tbody class="context-of-attributes">
+                        <tr>
+                            <td style="padding-left: 25px;">
+                            </td>
+                            <td >
+                                {{ comment.text |safe }}
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        
+            {% endfor %}
+                <table class="more">
+                <tr>
+                    <td style="padding-left: 25px;"></td>
+                    <td>
+                        More
+                    </td>
+                </tr>
+            </table>
+            <table class="table-of-context">
+                <tbody class="t-body-of-context">
+
+                </tbody>
+                </table>
+        </main>
+       
+{% endblock %}

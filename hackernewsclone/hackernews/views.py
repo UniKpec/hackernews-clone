@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
 from .models import Story
+from .forms import SignupForm,LoginForm
 from urllib.parse import urlparse
 import requests
 import datetime
@@ -34,7 +37,34 @@ def fetch_stories(story_type="top"):
                         "time": datetime.datetime.fromtimestamp(story_data.get("time", 0)),
                   })
           
-      
+
+
+def login_signup_view(request):
+      print("METHOD:", request.method)  
+      print("POST DATA:", request.POST)
+      login_form = LoginForm(request, data=request.POST or None,prefix="login")
+      signup_form = SignupForm(request.POST or None, prefix="signup")
+
+      if request.method == "POST":
+          
+          if "login-submit" in request.POST and login_form.is_valid():
+               
+            user = login_form.get_user()
+            login(request,user)
+            return redirect('hackernews:news')
+          elif "signup-submit" in request.POST :
+            print("POST DATA:", request.POST)
+            if signup_form.is_valid():
+                  print("Signup form geçerli")
+                  user = signup_form.save(commit=False)
+                  user.set_password(signup_form.cleaned_data["password"])
+                  user.save()
+                  login(request,user)
+                  return redirect('hackernews:job')
+      return render(request, 'hackernews/login_signup.html',context={"login_form":login_form,"signup_form":signup_form}) 
+
+
+   
 def ask_detail(request, hn_id):
     story_url = f"https://hacker-news.firebaseio.com/v0/item/{hn_id}.json"
     story_data = requests.get(story_url).json()
@@ -51,7 +81,31 @@ def ask_detail(request, hn_id):
         "comments": comments
     })
 
-           
+
+def fetch_comments_by_story_id(request,hn_id):
+    story_url = f"https://hacker-news.firebaseio.com/v0/item/{hn_id}.json"
+    story_data = requests.get(story_url).json()
+
+    comments = []
+    for kid_id in story_data.get("kids", []):
+        comment_url = f"https://hacker-news.firebaseio.com/v0/item/{kid_id}.json"
+        comment_data = requests.get(comment_url).json()
+        comments.append(comment_data)
+
+    return render(request, "hackernews/new_comments.html", {"comments": comments,
+                                                              "story": story_data})
+
+
+def past_stories_show(request):
+    past_stories = Story.objects.filter(story_type='top').order_by('-time')[:30] 
+    return render(request, 'hackernews/past.html', {'stories': past_stories})
+
+def domain_show(request,domain):
+     stories = Story.objects.filter(domain=domain).order_by("-time")
+     return render(request, 'hackernews/domain_show.html',{"stories": stories,"domain":domain })
+     
+     
+
 def top_stories_show(request):
         fetch_stories()
         stories = Story.objects.filter(story_type = "top")
@@ -76,6 +130,9 @@ def show_stories_ask(request):
       fetch_stories("ask")
       stories = Story.objects.filter(story_type = "ask")
       return render(request,'hackernews/ask.html',context={"stories":stories})
+
+
+
 
 
 def index(request):

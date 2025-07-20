@@ -4,16 +4,10 @@
 {% block content %}
 
         <main class="context">
-            <p>
-                Please read the Show HN <a href="https://news.ycombinator.com/showhn.html">rules</a> and <a href="https://news.ycombinator.com/item?id=22336638">tips</a> before posting. You can browse the newest Show HNs <a href="">here.</a>
-            </p>
             {% for story in stories %}
             <table class="table-of-context">
                 <tbody class="t-body-of-context">
                     <tr>
-                        <td class="number" style="color: #828282;">
-                           {{ forloop.counter }}
-                        </td>
                         <td> <a href="#" style="color: #828282;" >
                                 <i class="fa-duotone fa-solid fa-caret-up" ></i>
                             </a>
@@ -40,7 +34,7 @@
                                 <a href="#" class="lnk">{{ story.by }}</a>
                             </td>
                             <td>
-                               <a href="#" class="lnk"> {{ story.time }} ago</a>
+                               <a href="" class="lnk"> {{ story.time }} ago </a>
                             </td>
                             <td>
                                 <a href="#" class="lnk">| hide</a>

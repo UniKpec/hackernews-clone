@@ -31,7 +31,7 @@
                             new
                     </a></li>
                     <li class="past">
-                         <a href="">
+                         <a href="{% url 'hackernews:past' %}">
                             | past
                     </a></li>
                     <li class="comments">
@@ -58,7 +58,7 @@
                 </ul>
             </nav>
             <ul class="login">
-                <li><a href="#">login</a></li>
+                <li><a href="{% url 'hackernews:login_signup' %}">login</a></li>
             </ul>
             
         </header>

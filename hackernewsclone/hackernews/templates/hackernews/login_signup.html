@@ -1,0 +1,60 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/hacker-news-icon.png' %}" type="image/x-icon" />
+</head>
+
+
+<h3>
+    Login
+</h3>
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td >
+            {{ login_form.username.label }} :
+            </td>
+            <td>
+            {{ login_form.username }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ login_form.password.label}} :
+                </td>
+                <td>
+                {{ login_form.password }}
+            </td>
+        </tr>
+    </table>
+    <button type="submit" name="login-submit" style="margin: 3px;">login</button>
+</form>
+<br>
+
+<h3>
+    Create Account
+</h3>
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td >
+            {{ signup_form.username.label }} :
+            </td>
+            <td>
+            {{ signup_form.username }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ signup_form.password.label}} :
+                </td>
+                <td>
+                {{ signup_form.password }}
+            </td>
+        </tr>
+    </table>
+    <button type="submit" name="signup-submit" style="margin: 3px;">create account</button>
+</form>
