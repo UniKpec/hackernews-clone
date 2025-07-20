@@ -26,6 +26,11 @@
                          <a href="{% url 'hackernews:news' %}">
                             Hacker News
                     </a></li>
+                    {% if user.is_authenticated %}
+                    <li class="welcome">
+                        Welcome
+                    </li>
+                    {% endif %}
                     <li class="new">
                          <a href="{% url 'hackernews:new' %}">
                             new
@@ -35,7 +40,7 @@
                             | past
                     </a></li>
                     <li class="comments">
-                         <a href="">
+                         <a href="#">
                             | comments
                     </a></li>
                     <li class="ask">
@@ -51,14 +56,32 @@
                          <a href="{% url 'hackernews:job' %}">
                             | jobs
                     </a></li>
+                    {% if user.is_authenticated %}
                     <li class="submit">
-                         <a href="">
+                         <a href="{% url 'hackernews:submit_views' %}">
                             | submit
-                    </a></li>
+                    </a>
+                </li>
+                {% else %}
+                <li class="submit">
+                         <a href="{% url 'hackernews:login_signup' %}">
+                            | submit
+                    </a>
+                    </li>
+                {% endif %}
                 </ul>
             </nav>
             <ul class="login">
+                {% if user.is_authenticated  %}
+                <li>
+                    <a href="#">{{user.username}} |</a>
+                </li>
+                <li>
+                    <a href="{% url 'hackernews:logout' %}">logout</a>
+                </li>
+                {% else %}
                 <li><a href="{% url 'hackernews:login_signup' %}">login</a></li>
+                {% endif %}
             </ul>
             
         </header>

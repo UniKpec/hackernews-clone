@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit| Hacker News</title>
+    <link rel="icon" href="{% static 'img/hacker-news-icon.png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'css/homapage.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <div class="container">
+        <header class="homepage-header">
+            <nav>
+                <ul class="homepage-ul">
+                    <li class="logo">
+                        <a href="{% url 'hackernews:news' %}">
+                            <img src="{% static 'img/hacker-news-icon.png' %}   " alt="hacker news logo"
+                            width="15px"
+                            height="15px">
+                    </a></li>
+                    <li class="hacker-news">
+                            Submit
+                    </a></li>
+                </ul>
+            </nav>
+        </header>
+    <main class="context">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td style="text-align: left; " >
+                        <label for="title" style="font-size: small;">title</label>
+                    </td>
+                    <td style="text-align: left;">
+                        <input type="text" id="title" size="52">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;" >
+                        <label for="url_name" style="font-size: small;">url</label>
+                    </td>
+                    <td style="text-align: left;">
+                        <input type="url" id="url_name" size="52">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <label for="text_name" style="font-size: small;">text</label>
+                    </td>
+                    <td style="text-align: left;">
+                        <textarea name="" id="text_name" rows="5" cols="50" ></textarea>
+                    </td>    
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td style="text-align: left;">
+                        <button type="submit" name="news-submit">submit</button>
+                    </td>
+                </tr>  
+            </table>
+        </form>
+        <p>
+            Leave url blank to submit a question for discussion. If there is no url, text will appear at the top of the thread. If there is a url, text is optional.
+        </p>
+        <p> 
+            You can also submit via bookmarklet.
+        </p>
+    </main>
+</div>
+</body>
+</html>

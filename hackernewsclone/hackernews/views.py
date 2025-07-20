@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.models import User
 from .models import Story
 from .forms import SignupForm,LoginForm
@@ -48,10 +48,11 @@ def login_signup_view(request):
       if request.method == "POST":
           
           if "login-submit" in request.POST and login_form.is_valid():
-               
+            
             user = login_form.get_user()
             login(request,user)
             return redirect('hackernews:news')
+          
           elif "signup-submit" in request.POST :
             print("POST DATA:", request.POST)
             if signup_form.is_valid():
@@ -63,7 +64,10 @@ def login_signup_view(request):
                   return redirect('hackernews:job')
       return render(request, 'hackernews/login_signup.html',context={"login_form":login_form,"signup_form":signup_form}) 
 
-
+def logout_view(request):
+     logout(request)
+     return redirect("hackernews:news")
+     
    
 def ask_detail(request, hn_id):
     story_url = f"https://hacker-news.firebaseio.com/v0/item/{hn_id}.json"
@@ -132,7 +136,8 @@ def show_stories_ask(request):
       return render(request,'hackernews/ask.html',context={"stories":stories})
 
 
-
+def submit_view(request):
+     return render(request,"hackernews/submit_text.html")
 
 
 def index(request):

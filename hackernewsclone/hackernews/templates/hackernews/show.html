@@ -24,7 +24,11 @@
                             </a>   
                         </td>
                         <td class="context-of-head-link lnk" style="color: #828282;">
+                            {% if story.domian %}
                             <a href="{% url 'hackernews:stories_by_domain' story.domain %}" class="lnk">({{ story.domain }})</a>
+                            {% else %}
+                            <a href="#" class="lnk">()</a>
+                            {% endif %}
                         </td>
                 </tbody>
                 </table>
@@ -46,7 +50,7 @@
                                 <a href="#" class="lnk">| hide</a>
                             </td>
                             <td>
-                                <a href="#" class="lnk">|  {{ story.descendants }} comments</a>
+                                <a href="{% url 'hackernews:comments_by_story' story.hn_id %}" class="lnk">|  {{ story.descendants }} comments</a>
                             </td>
                         </tr>
                     </tr>
