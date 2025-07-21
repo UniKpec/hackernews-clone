@@ -35,6 +35,12 @@
                          <a href="{% url 'hackernews:new' %}">
                             new
                     </a></li>
+                    {% if user.is_authenticated %}
+                        <li class="threads">
+                         <a href="{% url 'hackernews:threads' %}">
+                            | threads
+                    </a></li>
+                    {% endif %}
                     <li class="past">
                          <a href="{% url 'hackernews:past' %}">
                             | past

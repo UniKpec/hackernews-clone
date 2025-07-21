@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.models import User
-from .models import Story
-from .forms import SignupForm,LoginForm
+from .models import Story,SubmitStory
+from .forms import SignupForm,LoginForm,Usersubmit
 from urllib.parse import urlparse
+from django.contrib.auth.decorators import login_required
 import requests
 import datetime
 
@@ -61,6 +62,8 @@ def login_signup_view(request):
                   user.set_password(signup_form.cleaned_data["password"])
                   user.save()
                   login(request,user)
+                  print("Giriş yapıldı mı:", request.user.is_authenticated)
+                  print("Oturum kullanıcı:", request.user)
                   return redirect('hackernews:job')
       return render(request, 'hackernews/login_signup.html',context={"login_form":login_form,"signup_form":signup_form}) 
 
@@ -134,7 +137,8 @@ def top_stories_show(request):
 def new_stories_show(request):
       fetch_stories("new")
       stories = Story.objects.filter(story_type = "new")
-      return render(request, 'hackernews/new.html',context= {'stories':stories})
+      submits = SubmitStory.objects.all() 
+      return render(request, 'hackernews/new.html',context= {'stories':stories,'submits':submits})
 
 def job_stories_show(request):
       fetch_stories("job")
@@ -151,10 +155,30 @@ def show_stories_ask(request):
       stories = Story.objects.filter(story_type = "ask")
       return render(request,'hackernews/ask.html',context={"stories":stories})
 
-
+@login_required
 def submit_view(request):
-     return render(request,"hackernews/submit_text.html")
-
+    print("User is authenticated:", request.user.is_authenticated)
+    print("User:", request.user)
+    print("User ID:", request.user.id)
+    if request.method == "POST":
+        form = Usersubmit(request.POST)
+        if form.is_valid():
+            story = form.save(commit=False)
+            story.author = request.user  
+            story.save()
+            return redirect("hackernews:news")  
+        else:
+            print("Form errors:", form.errors)  
+    else:
+        form = Usersubmit()
+    
+    return render(request, "hackernews/submit_text.html", {"form": form})
+    
+@login_required
+def threads(request): 
+    user_stories = SubmitStory.objects.all().filter(author=request.user)
+    return render(request, 'hackernews/threads.html',context={"user_stories": user_stories})
+    
 
 def index(request):
     return render(request,"base.html")

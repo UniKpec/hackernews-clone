@@ -16,6 +16,7 @@ urlpatterns = [
     path("ask/<int:hn_id>/",views.ask_detail,name="ask_detail"),
     path("past/",views.past_stories_show,name="past"),
     path("submit/",views.submit_view,name="submit_views"),
+    path("threads/",views.threads,name="threads"),
     path('domain/<str:domain>/', views.domain_show, name='stories_by_domain'),
     path("comments/<int:hn_id>/", views.fetch_comments_by_story_id, name="comments_by_story"),
 ]
