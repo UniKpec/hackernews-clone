@@ -25,7 +25,7 @@
                     {% endif %}
                 </td>
                 <td class="context-of-head-link lnk" style="color: #828282;">
-                    <a href="#">(user-submitted)</a>
+                    <a href="{{ story.domain }}">{{ story.domain }}</a>
                 </td>
             </tr>
         </tbody>
@@ -43,8 +43,6 @@
         </tbody>
     </table>
     {% endfor %}
-
-    <!-- API'den gelen hikayeler -->
     {% for story in stories %}
     <table class="table-of-context">
         <tbody class="t-body-of-context">

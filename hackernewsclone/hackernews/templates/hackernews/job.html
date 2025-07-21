@@ -24,7 +24,7 @@
                             </a>   
                         </td>
                         <td class="context-of-head-link lnk" style="color: #828282;">
-                            {% if story.domian %}
+                            {% if story.domain %}
                             <a href="{% url 'hackernews:stories_by_domain' story.domain %}" class="lnk">({{ story.domain }})</a>
                             {% else %}
                             <a href="#" class="lnk">()</a>

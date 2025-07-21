@@ -14,6 +14,7 @@ class Story(models.Model):
 class SubmitStory(models.Model):
     title = models.CharField(max_length=100, blank=True)
     url = models.URLField(null=True,blank=True)
+    domain = models.CharField(null=True,blank=True)
     text = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)

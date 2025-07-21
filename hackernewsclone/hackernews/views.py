@@ -164,7 +164,8 @@ def submit_view(request):
         form = Usersubmit(request.POST)
         if form.is_valid():
             story = form.save(commit=False)
-            story.author = request.user  
+            story.author = request.user
+            story.domain = urlparse(story.url).netloc
             story.save()
             return redirect("hackernews:news")  
         else:
@@ -179,6 +180,9 @@ def threads(request):
     user_stories = SubmitStory.objects.all().filter(author=request.user)
     return render(request, 'hackernews/threads.html',context={"user_stories": user_stories})
     
+@login_required
+def points_add(request):
+     Story.objects.filter(score="score")
 
 def index(request):
     return render(request,"base.html")
